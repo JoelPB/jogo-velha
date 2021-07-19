@@ -6,6 +6,10 @@ var quadrados = document.getElementsByClassName('quadrado');
 mudarJogador('X');
 
 function escolherQuadrado(id){
+    if (vencedor !== null){
+        return;
+    }
+
     var quadrado = document.getElementById(id);
 
     if (quadrado.innerHTML !== '-') {
@@ -64,6 +68,30 @@ function checaVencedor (){
         mudaVencedor(quadrado1);
         return;
     }
+
+    if (checaSequencia(quadrado2, quadrado5, quadrado8)) {
+        mudaCorQuadrado(quadrado2, quadrado5, quadrado8);
+        mudaVencedor(quadrado2);
+        return;
+    }
+
+    if (checaSequencia(quadrado3, quadrado6, quadrado9)) {
+        mudaCorQuadrado(quadrado3, quadrado6, quadrado9);
+        mudaVencedor(quadrado3);
+        return;
+    }
+
+    if (checaSequencia(quadrado1, quadrado5, quadrado9)) {
+        mudaCorQuadrado(quadrado1, quadrado5, quadrado9);
+        mudaVencedor(quadrado1);
+        return;
+    }
+
+    if (checaSequencia(quadrado3, quadrado5, quadrado7)) {
+        mudaCorQuadrado(quadrado3, quadrado5, quadrado7);
+        mudaVencedor(quadrado3);
+        return;
+    }
 }
 
 function mudaVencedor(quadrado) {
@@ -85,4 +113,18 @@ function checaSequencia(quadrado1, quadrado2, quadrado3){
     }
 
     return eigual;
+}
+
+function reiniciar(){
+    vencedor = null;
+    vencedorSelecionado.innerHTML = '';
+
+    for (var i=1; i<=9; i++){
+        var quadrado = document.getElementById(i);
+        quadrado.style.background = '#EEE';
+        quadrado.style.color = '#EEE';
+        quadrado.innerHTML = '-';
+    }
+
+    mudarJogador('X');
 }
